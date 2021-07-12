@@ -7,6 +7,7 @@ import Document, {
   NextScript,
   DocumentContext,
 } from 'next/document';
+import { theme } from '../styles/theme';
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -17,7 +18,9 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
-        <Head />
+        <Head>
+          <meta name="theme-color" content={theme.palette.primary.main} />
+        </Head>
         <body>
           <Main />
           <NextScript />
@@ -40,7 +43,6 @@ MyDocument.getInitialProps = async (ctx) => {
 
   return {
     ...initialProps,
-    // Styles fragment is rendered after the app and page rendering finish.
     styles: [
       ...Children.toArray(initialProps.styles),
       sheets.getStyleElement(),
